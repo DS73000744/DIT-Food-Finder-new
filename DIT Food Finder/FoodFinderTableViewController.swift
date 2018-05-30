@@ -61,32 +61,32 @@ class FoodFinderTableViewController: UITableViewController {
         print(foodStoreNames[indexPath.row])
         
 
-        let optionMenu = UIAlertController(title : nil, message : "무엇을 원하시나요", preferredStyle : .actionSheet)
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        let callAction = UIAlertAction(title: "전화걸기", style: .default) {
-            (action: UIAlertAction) -> Void in
-            print("전화 걸기 실행!!")
-            let alertMessage = UIAlertController(title: "현재 서비스 구축중", message: "죄송합니다", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertMessage.addAction(okAction)
-            self.present(alertMessage, animated: true)
-            
-            }
+//        let optionMenu = UIAlertController(title : nil, message : "무엇을 원하시나요", preferredStyle : .actionSheet)
+//
+//        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+//
+//        let callAction = UIAlertAction(title: "전화걸기", style: .default) {
+//            (action: UIAlertAction) -> Void in
+//            print("전화 걸기 실행!!")
+//            let alertMessage = UIAlertController(title: "현재 서비스 구축중", message: "죄송합니다", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//            alertMessage.addAction(okAction)
+//            self.present(alertMessage, animated: true)
+//
+//            }
         
         //체크박스 만들기
-        let checkinAction = UIAlertAction(title: "체크 인", style: .default) {
-            (action: UIAlertAction) -> Void in
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = .checkmark
-        }
-        
-        optionMenu.addAction(cancelAction)
-        optionMenu.addAction(callAction)
-        optionMenu.addAction(checkinAction)
-        
-        present(optionMenu, animated: true)
+//        let checkinAction = UIAlertAction(title: "체크 인", style: .default) {
+//            (action: UIAlertAction) -> Void in
+//            let cell = tableView.cellForRow(at: indexPath)
+//            cell?.accessoryType = .checkmark
+//        }
+//
+//        optionMenu.addAction(cancelAction)
+//        optionMenu.addAction(callAction)
+//        optionMenu.addAction(checkinAction)
+//
+//        present(optionMenu, animated: true)
         
         
     }
@@ -135,5 +135,23 @@ class FoodFinderTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "Detail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as!
+                DetailViewController
+                destinationController.cellType = foodStoreType[indexPath.row]
+                destinationController.cellAddress = foodStoreAddress[indexPath.row]
+                destinationController.cellImages = foodStoreImages[indexPath.row]
+                destinationController.cellName = foodStoreNames[indexPath.row]
+            
+            
+        }
 
+}
+}
 }
